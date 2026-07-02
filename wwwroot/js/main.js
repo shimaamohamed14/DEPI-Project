@@ -590,6 +590,32 @@ function applyLanguage() {
         btn.textContent = isAr ? 'English' : 'العربية';
     });
 
+    // Flip main navbar: brand on the right + nav links on the left when Arabic
+    document.querySelectorAll('nav.navbar > .container, nav.navbar > .container-fluid').forEach(navContainer => {
+        const brand = navContainer.querySelector('.navbar-brand');
+        const toggler = navContainer.querySelector('.navbar-toggler');
+        const collapse = navContainer.querySelector('.navbar-collapse');
+        if (brand && collapse) {
+            navContainer.style.display = 'flex';
+            navContainer.style.flexDirection = 'row';
+            brand.style.order = isAr ? '3' : '1';
+            if (toggler) toggler.style.order = '2';
+            collapse.style.order = isAr ? '1' : '3';
+        }
+    });
+
+    // Flip auth-page navbar (Login / Register etc.): brand right, back-link + lang-toggle left
+    document.querySelectorAll('nav.auth-nav').forEach(navEl => {
+        const brand = navEl.querySelector('.auth-nav-brand');
+        const actions = navEl.querySelector('.nav-actions');
+        if (brand && actions) {
+            navEl.style.display = 'flex';
+            navEl.style.flexDirection = 'row';
+            brand.style.order = isAr ? '2' : '1';
+            actions.style.order = isAr ? '1' : '2';
+        }
+    });
+
     if (document.getElementById('bloodUnitsTable')) fetchBloodBankData();
     if (document.getElementById('hospitalRequestsTable')) fetchHospitalData();
     if (document.getElementById('adminUsersTable')) fetchAdminData();

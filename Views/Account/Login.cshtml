@@ -24,8 +24,8 @@
     <nav class="auth-nav">
         <a asp-controller="Home" asp-action="Index" class="auth-nav-brand">🩸 Life Artery</a>
         <div class="nav-actions">
-            <a asp-controller="Home" asp-action="Index" class="nav-back"><i class="bi bi-arrow-left"></i> <span id="txt-back">Back to Home</span></a>
-            <button class="lang-toggle" onclick="toggleLang()"><i class="bi bi-translate"></i><span id="langLabel">العربية</span></button>
+            <a asp-controller="Home" asp-action="Index" class="nav-back"><i class="bi bi-arrow-left"></i> <span id="txt-back" data-i18n="auth_back_home">Back to Home</span></a>
+            <button class="lang-toggle" onclick="toggleLang()"><i class="bi bi-translate"></i><span id="langLabel" data-i18n="lang_switch">العربية</span></button>
         </div>
     </nav>
 
@@ -34,7 +34,7 @@
 
             <!-- TABS -->
             <div class="auth-tabs">
-                <button class="auth-tab active" id="tabSignIn" onclick="switchTab('signin')"><span id="txt-tab-signin">Sign In</span></button>
+                <button class="auth-tab active" id="tabSignIn"><span id="txt-tab-signin" data-i18n="nav_signin">Sign In</span></button>
             </div>
 
             @if (TempData["Success"] != null)
@@ -47,8 +47,8 @@
             <div class="auth-panel active" id="panelSignin">
                 <div class="card-brand">
                     <div class="card-brand-icon"></div>
-                    <div class="card-brand-title" id="txt-welcome">Welcome Back</div>
-                    <div class="card-brand-sub" id="txt-welcome-sub">Sign in to access your dashboard</div>
+                    <div class="card-brand-title" id="txt-welcome" data-i18n="welcome_back">Welcome Back</div>
+                    <div class="card-brand-sub" id="txt-welcome-sub" data-i18n="welcome_back_sub">Sign in to access your dashboard</div>
                 </div>
                 <form asp-action="Login" asp-controller="Account" method="post">
                     <div asp-validation-summary="ModelOnly" class="text-danger" style="margin-bottom:12px;"></div>
@@ -73,9 +73,9 @@
                         </div>
                         <span asp-validation-for="Password" class="text-danger"></span>
                     </div>
-                    <button type="submit" class="auth-btn" id="txt-signin-btn">Sign In →</button>
+                    <button type="submit" class="auth-btn" id="txt-signin-btn" data-i18n="signin_btn">Sign In →</button>
                 </form>
-                <div class="auth-switch"><span id="txt-no-acc">Don't have an account?</span> <a asp-controller="Account" asp-action="Register" id="txt-go-signup">Sign Up</a></div>
+                <div class="auth-switch"><span id="txt-no-acc" data-i18n="no_account">Don't have an account?</span> <a asp-controller="Account" asp-action="Register" id="txt-go-signup" data-i18n="nav_signup">Sign Up</a></div>
             </div>
 
         </div>

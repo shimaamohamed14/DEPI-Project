@@ -24,8 +24,8 @@
     <nav class="auth-nav">
         <a asp-controller="Home" asp-action="Index" class="auth-nav-brand">🩸 Life Artery</a>
         <div class="nav-actions">
-            <a asp-controller="Home" asp-action="Index" class="nav-back"><i class="bi bi-arrow-left"></i> <span id="txt-back">Back to Home</span></a>
-            <button class="lang-toggle" onclick="toggleLang()"><i class="bi bi-translate"></i><span id="langLabel">العربية</span></button>
+            <a asp-controller="Home" asp-action="Index" class="nav-back"><i class="bi bi-arrow-left"></i> <span id="txt-back" data-i18n="auth_back_home">Back to Home</span></a>
+            <button class="lang-toggle" onclick="toggleLang()"><i class="bi bi-translate"></i><span id="langLabel" data-i18n="lang_switch">العربية</span></button>
         </div>
     </nav>
 
@@ -34,7 +34,7 @@
 
             <!-- TABS -->
             <div class="auth-tabs">
-                <button class="auth-tab active"><span id="txt-tab-signup">Sign Up</span></button>
+                <button class="auth-tab active"><span id="txt-tab-signup" data-i18n="nav_signup">Sign Up</span></button>
             </div>
 
             <div class="auth-panel active" id="panelSignup">
@@ -43,47 +43,47 @@
                     <div class="step-progress"><div class="step-fill" style="width:100%"></div></div>
                     <div class="card-brand" style="margin-bottom:14px;">
                         <div class="card-brand-icon">🏥</div>
-                        <div class="card-brand-title" id="txt-hosp-title">Hospital Registration</div>
-                        <div class="card-brand-sub" id="txt-hosp-sub">Official facility information</div>
+                        <div class="card-brand-title" id="txt-hosp-title" data-i18n="reg_hosp_title">Hospital Registration</div>
+                        <div class="card-brand-sub" id="txt-hosp-sub" data-i18n="reg_facility_sub">Official facility information</div>
                     </div>
                     <div class="auth-alert error" id="hospAlert"><i class="bi bi-exclamation-circle-fill"></i><span id="hospAlertMsg"></span></div>
-                    <div class="auth-alert success" id="hospSuccess"><i class="bi bi-check-circle-fill"></i><span id="txt-reg-ok-hosp">Account created! Redirecting…</span></div>
+                    <div class="auth-alert success" id="hospSuccess"><i class="bi bi-check-circle-fill"></i><span id="txt-reg-ok-hosp" data-i18n="reg_created_redirect">Account created! Redirecting…</span></div>
                     <form asp-action="HospitalRegister" asp-controller="Account" method="post" enctype="multipart/form-data">
                         <div asp-validation-summary="All" class="text-danger"></div>
-                        <div class="form-section-label" id="txt-hosp-sec1">Facility Information</div>
+                        <div class="form-section-label" id="txt-hosp-sec1" data-i18n="sec_facility_info">Facility Information</div>
                         <div class="row g-2">
                             <div class="col-12">
                                 <div class="auth-field">
-                                    <label class="auth-label" id="txt-hospname-lbl">Hospital Name</label>
+                                    <label class="auth-label" id="txt-hospname-lbl" data-i18n="hosp_name">Hospital Name</label>
                                     <input asp-for="Name" class="auth-input" placeholder="Cairo Medical Center" />
                                     <span asp-validation-for="Name" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="auth-field">
-                                    <label class="auth-label" id="txt-hosplicense-lbl">License Number</label>
+                                    <label class="auth-label" id="txt-hosplicense-lbl" data-i18n="h_license">License Number</label>
                                     <input asp-for="LicenseNumber" class="auth-input" placeholder="HOSP-2024-XXXXX" />
                                     <span asp-validation-for="LicenseNumber" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="auth-field">
-                                    <label class="auth-label" id="txt-hospissuer-lbl">Issuing Authority</label>
+                                    <label class="auth-label" id="txt-hospissuer-lbl" data-i18n="h_issuer">Issuing Authority</label>
                                     <select asp-for="IssuingAuthority" class="auth-select">
-                                        <option value="" disabled selected>Select…</option>
-                                        <option value="MOH">Ministry of Health</option>
-                                        <option value="HIO">Health Insurance Org.</option>
-                                        <option value="Other">Other</option>
+                                        <option value="" disabled selected data-i18n="select_placeholder">Select…</option>
+                                        <option value="MOH" data-i18n="moh_option">Ministry of Health</option>
+                                        <option value="HIO" data-i18n="hio_option">Health Insurance Org.</option>
+                                        <option value="Other" data-i18n="other_option">Other</option>
                                     </select>
                                     <span asp-validation-for="IssuingAuthority" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="auth-field">
-                                    <label class="auth-label" id="txt-hosplicfile-lbl">License Document (PDF / Image)</label>
+                                    <label class="auth-label" id="txt-hosplicfile-lbl" data-i18n="reg_lic_doc_label">License Document (PDF / Image)</label>
                                     <div class="file-wrap" onclick="document.getElementById('hospLicFile').click()">
                                         <i class="bi bi-file-earmark-arrow-up file-icon"></i>
-                                        <label class="file-lbl" id="hospLicFileLabel">Click to upload…</label>
+                                        <label class="file-lbl" id="hospLicFileLabel" data-i18n="click_upload">Click to upload…</label>
                                         <input asp-for="LicenseDocument"
                                             type="file"
                                             id="hospLicFile"
@@ -92,84 +92,84 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-section-label" id="txt-hosp-sec2">Location & Contact</div>
+                        <div class="form-section-label" id="txt-hosp-sec2" data-i18n="loc_contact_section">Location & Contact</div>
                         <div class="row g-2">
                             <div class="col-md-6">
                                 <div class="auth-field">
-                                    <label class="auth-label" id="txt-hospgov-lbl">Governorate</label>
+                                    <label class="auth-label" id="txt-hospgov-lbl" data-i18n="h_governorate">Governorate</label>
                                     <input asp-for="Governorate" class="auth-input" placeholder="Cairo" />
                                     <span asp-validation-for="Governorate" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="auth-field">
-                                    <label class="auth-label" id="txt-hospcity-lbl">City / District</label>
+                                    <label class="auth-label" id="txt-hospcity-lbl" data-i18n="reg_city_district">City / District</label>
                                     <input asp-for="City" class="auth-input" placeholder="Heliopolis" />
                                     <span asp-validation-for="City" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="auth-field">
-                                    <label class="auth-label" id="txt-hospstreet-lbl">Street Address</label>
+                                    <label class="auth-label" id="txt-hospstreet-lbl" data-i18n="h_address">Street Address</label>
                                     <input asp-for="Address" class="auth-input" placeholder="22 Salah Salem St." />
                                     <span asp-validation-for="Address" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="auth-field">
-                                    <label class="auth-label" id="txt-hospphone-lbl">Official Phone</label>
+                                    <label class="auth-label" id="txt-hospphone-lbl" data-i18n="h_phone_label">Official Phone</label>
                                     <input asp-for="PhoneNumber" class="auth-input" placeholder="02XXXXXXXX" />
                                     <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="auth-field">
-                                    <label class="auth-label" id="txt-hospemail-lbl">Official Email</label>
+                                    <label class="auth-label" id="txt-hospemail-lbl" data-i18n="h_email_label">Official Email</label>
                                     <input asp-for="Email" class="auth-input" placeholder="info@hospital.eg" />
                                     <span asp-validation-for="Email" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="auth-field">
-                                    <label class="auth-label" id="txt-hospgps-lbl">GPS / Google Maps Link</label>
+                                    <label class="auth-label" id="txt-hospgps-lbl" data-i18n="reg_gps_label">GPS / Google Maps Link</label>
                                     <input asp-for="GoogleMapsLink" class="auth-input" placeholder="30.0444° N, 31.2357° E" />
                                     <span asp-validation-for="GoogleMapsLink" class="text-danger"></span>
                                 </div>
                             </div>
                         </div>
-                        <div class="form-section-label" id="txt-hosp-sec3">Facility Details</div>
+                        <div class="form-section-label" id="txt-hosp-sec3" data-i18n="facility_details_section">Facility Details</div>
                         <div class="row g-2">
                             <div class="col-12">
                                 <div class="auth-field">
-                                    <label class="auth-label" id="txt-hospmeddir-lbl">Medical Director Name</label>
+                                    <label class="auth-label" id="txt-hospmeddir-lbl" data-i18n="h_med_director">Medical Director Name</label>
                                     <input asp-for="MedicalDirectorName" class="auth-input" placeholder="Dr. Mohamed Kamal" />
                                     <span asp-validation-for="MedicalDirectorName" class="text-danger"></span>
                                 </div>
                             </div>
                         </div>
-                        <div class="form-section-label">Account Information</div>
+                        <div class="form-section-label" data-i18n="acct_info_section">Account Information</div>
                         <div class="auth-field">
-                            <label class="auth-label">Account Owner Name</label>
+                            <label class="auth-label" data-i18n="h_acct_owner">Account Owner Name</label>
                             <input asp-for="FullName" class="auth-input" placeholder="Ahmed Mohamed" />
                             <span asp-validation-for="FullName" class="text-danger"></span>
                         </div>
-                        <div class="form-section-label" id="txt-hosp-sec4">Account Security</div>
+                        <div class="form-section-label" id="txt-hosp-sec4" data-i18n="acct_security_section">Account Security</div>
                         <div class="auth-field">
-                            <label class="auth-label" id="txt-hosp-pass-lbl">Password</label>
+                            <label class="auth-label" id="txt-hosp-pass-lbl" data-i18n="h_new_pass">Password</label>
                             <div class="input-group-auth">
                                 <input asp-for="Password" type="password" class="auth-input" placeholder="Min. 8 characters" id="hospPass" />                                <button type="button" class="toggle-pass" onclick="togglePass('hospPass',this)"><i class="bi bi-eye-slash"></i></button>
                             </div>
                             <span asp-validation-for="Password" class="text-danger"></span>
                         </div>
                         <div class="auth-field">
-                            <label class="auth-label" id="txt-hosp-pass-confirm-lbl">Confirm Password</label>
+                            <label class="auth-label" id="txt-hosp-pass-confirm-lbl" data-i18n="confirm_password">Confirm Password</label>
                             <div class="input-group-auth">
                                 <input asp-for="ConfirmPassword" type="password" class="auth-input" placeholder="Repeat password" id="hospPassConfirm" />                                <button type="button" class="toggle-pass" onclick="togglePass('hospPassConfirm',this)"><i class="bi bi-eye-slash"></i></button>
                             </div>
                             <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                         </div>
-                        <button type="submit" class="auth-btn" id="txt-hosp-register-btn">Register Hospital →</button>
-                        <button type="button" class="auth-btn-outline" onclick="window.location.href='/Account/Register'" id="txt-hosp-back-role">← Change Role</button>
+                        <button type="submit" class="auth-btn" id="txt-hosp-register-btn" data-i18n="reg_hosp_btn">Register Hospital →</button>
+                        <button type="button" class="auth-btn-outline" onclick="window.location.href='/Account/Register'" id="txt-hosp-back-role" data-i18n="change_role_btn">← Change Role</button>
                     </form>
                 </div>
             </div><!-- /panelSignup -->
