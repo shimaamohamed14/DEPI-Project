@@ -1,0 +1,255 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+<!-- Hero -->
+<section class="hero-section">
+  <div class="hero-bg"></div>
+  <div class="hero-gradient"></div>
+  <div class="container hero-content">
+    <div class="row">
+      <div class="col-lg-7 mx-auto text-center">
+        <div class="hero-badge" data-i18n="hero_badge">🩸 Critical Resource Network</div>
+        <h1 class="hero-title">
+          Life <span>Artery</span>
+        </h1>
+        <p class="hero-subtitle" data-i18n="hero_sub">Connecting blood banks and hospitals across Egypt to eliminate delays and save lives — instantly.</p>
+        <div class="hero-actions">
+                        <a asp-controller="Home" asp-action="Search" class="btn-primary-custom">
+            <i class="bi bi-search-heart"></i> <span data-i18n="hero_btn_search">Search Blood Now</span>
+          </a>
+                        <a asp-controller="Home" asp-action="About" class="btn-outline-custom">
+            <span data-i18n="hero_btn_learn">Learn More</span> <i class="bi bi-arrow-right"></i>
+          </a>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <div class="hero-stat-num" data-count="@ViewBag.UnitsManaged">0</div>
+            <div class="hero-stat-label" data-i18n="hero_stat1">Units Managed</div>
+          </div>
+          <div class="hero-divider"></div>
+          <div class="hero-stat">
+            <div class="hero-stat-num" data-count="@ViewBag.HospitalsCount">0</div>
+            <div class="hero-stat-label" data-i18n="hero_stat2">Hospitals</div>
+          </div>
+          <div class="hero-divider"></div>
+          <div class="hero-stat">
+            <div class="hero-stat-num" data-count="@ViewBag.BloodBanksCount">0</div>
+            <div class="hero-stat-label" data-i18n="hero_stat3">Blood Banks</div>
+          </div>
+          <div class="hero-divider"></div>
+          <div class="hero-stat">
+            <div class="hero-stat-num" data-count="320">0</div>
+            <div class="hero-stat-label" data-i18n="hero_stat4">Lives Saved</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats Bar -->
+<section class="stats-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-6 col-md-3"><div class="stat-box"><div class="stat-number">24/7</div><div class="stat-label" data-i18n="stat_uptime">System Uptime</div></div></div>
+      <div class="col-6 col-md-3"><div class="stat-box"><div class="stat-number">&lt;2min</div><div class="stat-label" data-i18n="stat_response">Search Response</div></div></div>
+      <div class="col-6 col-md-3"><div class="stat-box"><div class="stat-number">8</div><div class="stat-label" data-i18n="stat_types">Blood Types Tracked</div></div></div>
+      <div class="col-6 col-md-3"><div class="stat-box"><div class="stat-number">100%</div><div class="stat-label" data-i18n="stat_access">Free Public Access</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Features -->
+<section class="features-section">
+  <div class="container">
+    <div class="row justify-content-center mb-5">
+      <div class="col-lg-6 text-center">
+        <span class="section-tag" data-i18n="feat_tag">Core Features</span>
+        <h2 class="section-title" data-i18n="feat_title">Everything You Need to Save a Life</h2>
+        <p class="section-subtitle mx-auto" data-i18n="feat_sub">From instant blood search to full inventory management — Life Artery covers every critical touchpoint.</p>
+      </div>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-4 reveal">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="bi bi-search-heart text-danger"></i></div>
+          <h5 data-i18n="feat1_title">Instant Blood Search</h5>
+          <p data-i18n="feat1_desc">Find available blood types across all connected banks in real-time. No login required for public users in emergencies.</p>
+        </div>
+      </div>
+      <div class="col-md-4 reveal">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="bi bi-droplet-half text-danger"></i></div>
+          <h5 data-i18n="feat2_title">Live Inventory Tracking</h5>
+          <p data-i18n="feat2_desc">Blood banks update stock in real-time. Units, expiry dates, and availability status are always current and accurate.</p>
+        </div>
+      </div>
+      <div class="col-md-4 reveal">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="bi bi-send-check text-danger"></i></div>
+          <h5 data-i18n="feat3_title">Digital Request System</h5>
+          <p data-i18n="feat3_desc">Hospitals send blood requests digitally. Banks approve, reject, or fulfill — with full status tracking throughout.</p>
+        </div>
+      </div>
+      <div class="col-md-4 reveal">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="bi bi-bell-fill text-danger"></i></div>
+          <h5 data-i18n="feat4_title">Low Stock Alerts</h5>
+          <p data-i18n="feat4_desc">Automatic warnings when a blood type drops below threshold — prompting banks to prepare donation campaigns early.</p>
+        </div>
+      </div>
+      <div class="col-md-4 reveal">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="bi bi-people-fill text-danger"></i></div>
+          <h5 data-i18n="feat5_title">Role-Based Access</h5>
+          <p data-i18n="feat5_desc">Dedicated dashboards for Admins, Blood Banks, and Hospitals. Each role sees exactly what they need, nothing more.</p>
+        </div>
+      </div>
+      <div class="col-md-4 reveal">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="bi bi-graph-up-arrow text-danger"></i></div>
+          <h5 data-i18n="feat6_title">Analytics & Reports</h5>
+          <p data-i18n="feat6_desc">System-wide statistics and reporting tools help administrators monitor health, spot trends, and act proactively.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Blood Types -->
+<section class="blood-types-section">
+  <div class="container" style="position:relative;z-index:2;">
+    <div class="row justify-content-center mb-5">
+      <div class="col-lg-6 text-center">
+        <span class="section-tag" style="background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);" data-i18n="bt_tag">Live Inventory</span>
+        <h2 class="section-title" style="color:#fff;" data-i18n="bt_title">Current Blood Availability</h2>
+        <p class="section-subtitle" style="color:rgba(255,255,255,0.5);margin:0 auto;" data-i18n="bt_sub">Updated in real-time from all connected blood banks.</p>
+      </div>
+    </div>
+    <div class="row g-3 justify-content-center">
+      @{
+        var bloodTypes = new[] { "A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-" };
+        var ba = ViewBag.BloodAvailability as Dictionary<string, int>;
+      }
+      @foreach (var bt in bloodTypes)
+      {
+        var qty = ba != null && ba.ContainsKey(bt) ? ba[bt] : 0;
+        var statusClass = qty > 30 ? "avail-high" : qty >= 10 ? "avail-high" : qty >= 5 ? "avail-med" : "avail-low";
+        var statusText = qty > 30 ? "High" : qty >= 10 ? "Available" : qty >= 5 ? "Low" : "Critical";
+        <div class="col-6 col-sm-4 col-md-3 col-lg text-center reveal"><div class="blood-type-card"><div class="blood-type-letter">@bt.Replace("-","−")</div><div style="color:rgba(255,255,255,0.45);font-size:0.78rem;">@qty units</div><span class="blood-type-avail @statusClass">@statusText</span></div></div>
+      }
+    </div>
+    <div class="text-center mt-4">
+      <a asp-controller="Home" asp-action="Search" class="btn-primary-custom" data-i18n="bt_search_btn">Search Availability →</a>
+    </div>
+  </div>
+</section>
+
+<!-- How It Works -->
+<section class="how-section">
+  <div class="container">
+    <div class="row justify-content-center mb-5">
+      <div class="col-lg-6 text-center">
+        <span class="section-tag" data-i18n="how_tag">How It Works</span>
+        <h2 class="section-title" data-i18n="how_title">Simple. Fast. Life-Saving.</h2>
+      </div>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-3 reveal">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <div class="step-title" data-i18n="step1_title">Search by Blood Type</div>
+          <div class="step-desc" data-i18n="step1_desc">Anyone can search for a blood type without needing to create an account.</div>
+        </div>
+      </div>
+      <div class="col-md-3 reveal">
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <div class="step-title" data-i18n="step2_title">View Bank Locations</div>
+          <div class="step-desc" data-i18n="step2_desc">See which banks have your type, their location, and contact information instantly.</div>
+        </div>
+      </div>
+      <div class="col-md-3 reveal">
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <div class="step-title" data-i18n="step3_title">Hospital Sends Request</div>
+          <div class="step-desc" data-i18n="step3_desc">Registered hospitals can send digital requests for specific types and quantities.</div>
+        </div>
+      </div>
+      <div class="col-md-3 reveal">
+        <div class="step-card">
+          <div class="step-number">4</div>
+          <div class="step-title" data-i18n="step4_title">Blood Bank Responds</div>
+          <div class="step-desc" data-i18n="step4_desc">Banks approve or fulfill requests, automatically updating their live inventory.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="testimonials-section">
+  <div class="container">
+    <div class="row justify-content-center mb-5">
+      <div class="col-lg-6 text-center">
+        <span class="section-tag" data-i18n="test_tag">Testimonials</span>
+        <h2 class="section-title" data-i18n="test_title">What People Say</h2>
+      </div>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-4 reveal">
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text" data-i18n="test1">Life Artery cut our blood sourcing time from hours to minutes. In critical situations, that time difference is everything.</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">A</div>
+            <div>
+              <div class="author-name" data-i18n="test1_name">Dr. Ahmed Kamel</div>
+              <div class="author-role" data-i18n="test1_role">Head of Emergency, Cairo Medical Center</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 reveal">
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text" data-i18n="test2">Managing our inventory used to take two people full-time. Now one person handles it in under an hour daily. Remarkable system.</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">S</div>
+            <div>
+              <div class="author-name" data-i18n="test2_name">Sara El-Masry</div>
+              <div class="author-role" data-i18n="test2_role">Director, Central Blood Bank</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 reveal">
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text" data-i18n="test3">My mother needed a rare blood type in the middle of the night. I found it in 3 minutes using the public search. This system saves lives.</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">M</div>
+            <div>
+              <div class="author-name" data-i18n="test3_name">Mohamed Tarek</div>
+              <div class="author-role" data-i18n="test3_role">Family Member — Cairo</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container" style="position:relative;z-index:2;">
+    <h2 class="cta-title" data-i18n="cta_title">Every Second Counts.</h2>
+    <p class="cta-sub" data-i18n="cta_sub">Don't let blood shortages cost lives. Use Life Artery to find the blood you need — right now.</p>
+    <div class="d-flex gap-3 justify-content-center flex-wrap">
+                <a asp-controller="Home" asp-action="Search" class="btn-primary-custom"><i class="bi bi-search-heart"></i> <span data-i18n="cta_btn1">Search Blood Now</span></a>
+                <a asp-controller="Home" asp-action="About" class="btn-outline-custom" data-i18n="cta_btn2">Learn About the System</a>
+    </div>
+  </div>
+</section>
+

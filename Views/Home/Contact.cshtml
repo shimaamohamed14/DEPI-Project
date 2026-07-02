@@ -1,0 +1,83 @@
+@{
+    ViewData["Title"] = "Contact";
+}
+
+<!-- Page Hero -->
+<section class="page-hero">
+  <div class="container page-hero-content">
+    <span class="section-tag" style="background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);" data-i18n="contact_tag">Get In Touch</span>
+    <h1 class="page-hero-title" data-i18n="contact_hero_title">Contact Life Artery Support</h1>
+    <p class="page-hero-sub mt-2" data-i18n="contact_hero_sub">We're here to help hospitals and blood banks across Egypt.</p>
+  </div>
+</section>
+
+<section class="py-5" style="background:var(--off-white);">
+  <div class="container py-4">
+    <div class="row g-5">
+      <div class="col-lg-7">
+        @if (TempData["Success"] != null)
+        {
+          <div class="alert alert-success" style="border-radius:12px;border:none;background:rgba(39,174,96,0.1);color:#27AE60;font-weight:500;"><i class="bi bi-check-circle-fill"></i> <span data-i18n="contact_success">@TempData["Success"]</span></div>
+        }
+        @if (TempData["Error"] != null)
+        {
+          <div class="alert alert-danger" style="border-radius:12px;border:none;background:rgba(192,57,43,0.1);color:var(--blood);font-weight:500;"><i class="bi bi-exclamation-circle-fill"></i> @TempData["Error"]</div>
+        }
+        <div class="feature-card" style="padding:2rem;">
+          <h4 style="font-family:'Playfair Display',serif;font-weight:700;margin-bottom:1.5rem;" data-i18n="contact_form_title">Send Us a Message</h4>
+          <form asp-action="Contact" asp-controller="Home" method="post">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="dash-label" data-i18n="contact_name_label">Full Name</label>
+                <input type="text" name="fullName" class="dash-input" required minlength="3" placeholder="Your full name">
+              </div>
+              <div class="col-md-6">
+                <label class="dash-label" data-i18n="contact_email_label">Email Address</label>
+                <input type="email" name="email" class="dash-input" required placeholder="your@email.com">
+              </div>
+              <div class="col-12">
+                <label class="dash-label" data-i18n="contact_subject_label">Subject</label>
+                <input type="text" name="subject" class="dash-input" required placeholder="How can we help?">
+              </div>
+              <div class="col-12">
+                <label class="dash-label" data-i18n="contact_message_label">Message</label>
+                <textarea name="message" class="dash-input" rows="5" required minlength="10" maxlength="1000" placeholder="Describe your inquiry..."></textarea>
+              </div>
+              <div class="col-12">
+                <button type="submit" class="btn-primary-custom"><i class="bi bi-send"></i> <span data-i18n="contact_send_btn">Send Message</span></button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <div class="feature-card" style="padding:2rem;background:linear-gradient(135deg,var(--blood),var(--crimson));color:#fff;border:none;">
+          <h4 style="font-family:'Playfair Display',serif;font-weight:700;margin-bottom:1.5rem;" data-i18n="contact_info_title">Contact Information</h4>
+          <div style="display:flex;flex-direction:column;gap:1.5rem;">
+            <div style="display:flex;align-items:center;gap:1rem;">
+              <div style="width:48px;height:48px;background:rgba(255,255,255,0.15);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;"><i class="bi bi-envelope-fill"></i></div>
+              <div>
+                <div style="font-size:0.78rem;text-transform:uppercase;letter-spacing:1px;opacity:0.6;" data-i18n="contact_email_title">Email Support</div>
+                <div style="font-weight:600;"><a href="mailto:lifearterysupport@gmail.com" style="color:#fff;text-decoration:none;">lifearterysupport@gmail.com</a></div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:1rem;">
+              <div style="width:48px;height:48px;background:rgba(255,255,255,0.15);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;"><i class="bi bi-telephone-fill"></i></div>
+              <div>
+                <div style="font-size:0.78rem;text-transform:uppercase;letter-spacing:1px;opacity:0.6;" data-i18n="contact_emergency_title">Emergency Hotline</div>
+                <div style="font-weight:600;">Ambulance: 123<br>Blood Hotline: 0111-647-4444</div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:1rem;">
+              <div style="width:48px;height:48px;background:rgba(255,255,255,0.15);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;"><i class="bi bi-clock-fill"></i></div>
+              <div>
+                <div style="font-size:0.78rem;text-transform:uppercase;letter-spacing:1px;opacity:0.6;" data-i18n="contact_hours_title">Service Hours</div>
+                <div style="font-weight:600;" data-i18n="contact_hours_value">24/7 Support for hospitals and blood banks.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

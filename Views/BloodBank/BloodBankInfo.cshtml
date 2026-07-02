@@ -1,0 +1,135 @@
+@model Life_Artery1.ViewModels.BloodBankInfoViewModel
+@{
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+    ViewData["Title"] = "Blood Bank Info";
+}
+
+<div class="dashboard-layout">
+  <aside class="sidebar">
+    <div class="sidebar-brand">Blood Bank, @Model.Name</div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-label" data-i18n="sb_settings">Settings</div>
+      <a href="/BloodBank/BloodBankInfo" class="sidebar-link active"><i class="bi bi-info-circle"></i> <span data-i18n="sb_bb_info">Blood Bank Info</span></a>
+      <div class="sidebar-label" data-i18n="sb_inventory">Inventory</div>
+      <a href="/BloodBank/Index#inventory" class="sidebar-link"><i class="bi bi-droplet-half"></i> <span data-i18n="sb_blood_units">Blood Units</span></a>
+      <a href="/BloodBank/Index#alerts" class="sidebar-link"><i class="bi bi-bell"></i> <span data-i18n="sb_low_alerts">Low Stock Alerts</span></a>
+      <div class="sidebar-label" data-i18n="sb_requests">Requests</div>
+      <a href="/BloodBank/Index#requests" class="sidebar-link"><i class="bi bi-inbox"></i> <span data-i18n="sb_incoming">Incoming Requests</span></a>
+    </nav>
+  </aside>
+
+  <main class="dashboard-main">
+    <div class="dash-header">
+      <h1 class="dash-title" data-i18n="sb_bb_info">Blood Bank Info</h1>
+      <p class="dash-subtitle" data-i18n="bb_info_sub">View and edit blood bank profile information.</p>
+    </div>
+
+    @if (TempData["Success"] != null)
+    {
+      <div style="background:rgba(46,204,113,0.1);border:1px solid rgba(46,204,113,0.3);color:#27AE60;padding:12px 18px;border-radius:12px;margin-bottom:1.5rem;font-weight:500;">
+        <i class="bi bi-check-circle-fill"></i> @TempData["Success"]
+      </div>
+    }
+
+    <div class="dash-table-card mb-4">
+      <form asp-action="BloodBankInfo" method="post">
+        <div style="padding:1.5rem;">
+          <h5 style="font-family:'Playfair Display',serif;font-weight:700;margin-bottom:1.5rem;color:var(--blood);">
+            <i class="bi bi-droplet"></i> <span data-i18n="bb_info_editable">Editable Information</span>
+          </h5>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="dash-label" data-i18n="bb_name">Blood Bank Name</label>
+              <input asp-for="Name" class="dash-input" />
+            </div>
+            <div class="col-md-6">
+              <label class="dash-label" data-i18n="bb_phone_label">Official Phone</label>
+              <input asp-for="OfficialPhone" class="dash-input" />
+            </div>
+            <div class="col-md-6">
+              <label class="dash-label" data-i18n="bb_email_label">Official Email</label>
+              <input asp-for="OfficialEmail" class="dash-input" />
+            </div>
+            <div class="col-md-6">
+              <label class="dash-label" data-i18n="bb_governorate">Governorate</label>
+              <input asp-for="Governorate" class="dash-input" />
+            </div>
+            <div class="col-md-6">
+              <label class="dash-label" data-i18n="bb_city">City</label>
+              <input asp-for="City" class="dash-input" />
+            </div>
+            <div class="col-12">
+              <label class="dash-label" data-i18n="bb_address">Street Address</label>
+              <input asp-for="Address" class="dash-input" />
+            </div>
+            <div class="col-md-6">
+              <label class="dash-label" data-i18n="bb_working_hours">Working Hours</label>
+              <input asp-for="WorkingHours" class="dash-input" placeholder="e.g. 09:00 - 17:00" />
+            </div>
+            <div class="col-md-6">
+              <label class="dash-label" data-i18n="bb_manager">Manager Name</label>
+              <input asp-for="ManagerName" class="dash-input" />
+            </div>
+            <div class="col-md-6">
+              <label class="dash-label" data-i18n="bb_acct_owner">Account Owner Name</label>
+              <input asp-for="AccountOwnerName" class="dash-input" />
+            </div>
+            <div class="col-md-6">
+              <label class="dash-label" data-i18n="bb_new_pass">Password <span style="color:var(--mid-gray);font-weight:400;text-transform:none;" data-i18n="h_pass_leave">(leave blank to keep current)</span></label>
+              <input asp-for="Password" class="dash-input" type="password" placeholder="New password" />
+            </div>
+          </div>
+          <input type="hidden" asp-for="Id" />
+          <input type="hidden" asp-for="LicenseNumber" />
+          <input type="hidden" asp-for="IssuingAuthority" />
+          <input type="hidden" asp-for="LicenseDocument" />
+          <input type="hidden" asp-for="Role" />
+          <input type="hidden" asp-for="IsApproved" />
+          <input type="hidden" asp-for="RegistrationDate" />
+          <button type="submit" class="btn-dash mt-3"><i class="bi bi-check-lg"></i> <span data-i18n="save_btn">Save Changes</span></button>
+        </div>
+      </form>
+    </div>
+
+    <div class="dash-table-card">
+      <div style="padding:1.5rem;">
+        <h5 style="font-family:'Playfair Display',serif;font-weight:700;margin-bottom:1.5rem;color:var(--mid-gray);">
+          <i class="bi bi-lock"></i> <span data-i18n="bb_info_readonly">Read-Only Information</span>
+        </h5>
+        <div class="row g-3">
+          <div class="col-md-4">
+            <label class="dash-label" data-i18n="bb_license">License Number</label>
+            <div style="background:var(--warm-gray);border-radius:10px;padding:11px 16px;font-size:0.92rem;color:var(--mid-gray);">@Model.LicenseNumber</div>
+          </div>
+          <div class="col-md-4">
+            <label class="dash-label" data-i18n="bb_issuer">Issuing Authority</label>
+            <div style="background:var(--warm-gray);border-radius:10px;padding:11px 16px;font-size:0.92rem;color:var(--mid-gray);">@Model.IssuingAuthority</div>
+          </div>
+          <div class="col-md-4">
+            <label class="dash-label" data-i18n="bb_role">Role</label>
+            <div style="background:var(--warm-gray);border-radius:10px;padding:11px 16px;font-size:0.92rem;color:var(--mid-gray);">@Model.Role</div>
+          </div>
+          <div class="col-md-4">
+            <label class="dash-label" data-i18n="bb_approved">IsApproved</label>
+            <div style="background:var(--warm-gray);border-radius:10px;padding:11px 16px;font-size:0.92rem;color:var(--mid-gray);">
+              @if (Model.IsApproved) { <span data-i18n="yes">Yes</span> } else { <span data-i18n="no">No</span> }
+            </div>
+          </div>
+          <div class="col-md-4">
+            <label class="dash-label" data-i18n="bb_reg_date">Registration Date</label>
+            <div style="background:var(--warm-gray);border-radius:10px;padding:11px 16px;font-size:0.92rem;color:var(--mid-gray);">@Model.RegistrationDate.ToString("dd MMM yyyy")</div>
+          </div>
+          @if (!string.IsNullOrEmpty(Model.LicenseDocument))
+          {
+          <div class="col-md-4">
+            <label class="dash-label" data-i18n="bb_lic_doc">License Document</label>
+            <div style="background:var(--warm-gray);border-radius:10px;padding:11px 16px;font-size:0.92rem;color:var(--mid-gray);">
+              <a href="@Model.LicenseDocument" target="_blank" style="color:var(--blood);"><i class="bi bi-file-earmark"></i> <span data-i18n="bb_view_doc">View Document</span></a>
+            </div>
+          </div>
+          }
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

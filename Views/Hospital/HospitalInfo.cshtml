@@ -1,0 +1,131 @@
+@model Life_Artery1.ViewModels.HospitalInfoViewModel
+@{
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+    ViewData["Title"] = "Hospital Info";
+}
+
+<div class="dashboard-layout">
+  <aside class="sidebar">
+    <div class="sidebar-brand">Hospital, @Model.Name</div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-label" data-i18n="sb_settings">Settings</div>
+      <a href="/Hospital/HospitalInfo" class="sidebar-link active"><i class="bi bi-info-circle"></i> <span data-i18n="sb_hospital_info">Hospital Info</span></a>
+      <div class="sidebar-label" data-i18n="sb_search_req">Search & Request</div>
+      <a href="/Hospital/Index#availability" class="sidebar-link"><i class="bi bi-grid-3x3-gap-fill"></i> <span data-i18n="sb_availability">Blood Availability</span></a>
+      <a href="/Hospital/Index#new-request" class="sidebar-link"><i class="bi bi-plus-circle"></i> <span data-i18n="sb_new_req">New Request</span></a>
+      <div class="sidebar-label" data-i18n="sb_my_req">My Requests</div>
+      <a href="/Hospital/Index#my-requests" class="sidebar-link"><i class="bi bi-list-check"></i> <span data-i18n="sb_history">Request History</span></a>
+    </nav>
+  </aside>
+
+  <main class="dashboard-main">
+    <div class="dash-header">
+      <h1 class="dash-title" data-i18n="sb_hospital_info">Hospital Info</h1>
+      <p class="dash-subtitle" data-i18n="h_info_sub">View and edit hospital profile information.</p>
+    </div>
+
+    @if (TempData["Success"] != null)
+    {
+      <div style="background:rgba(46,204,113,0.1);border:1px solid rgba(46,204,113,0.3);color:#27AE60;padding:12px 18px;border-radius:12px;margin-bottom:1.5rem;font-weight:500;">
+        <i class="bi bi-check-circle-fill"></i> @TempData["Success"]
+      </div>
+    }
+
+    <div class="dash-table-card mb-4">
+      <form asp-action="HospitalInfo" method="post">
+        <div style="padding:1.5rem;">
+          <h5 style="font-family:'Playfair Display',serif;font-weight:700;margin-bottom:1.5rem;color:var(--blood);">
+            <i class="bi bi-hospital"></i> <span data-i18n="h_info_editable">Editable Information</span>
+          </h5>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="dash-label" data-i18n="hosp_name">Hospital Name</label>
+              <input asp-for="Name" class="dash-input" />
+            </div>
+            <div class="col-md-6">
+              <label class="dash-label" data-i18n="h_phone_label">Official Phone</label>
+              <input asp-for="OfficialPhone" class="dash-input" />
+            </div>
+            <div class="col-md-6">
+              <label class="dash-label" data-i18n="h_email_label">Official Email</label>
+              <input asp-for="OfficialEmail" class="dash-input" />
+            </div>
+            <div class="col-md-6">
+              <label class="dash-label" data-i18n="h_governorate">Governorate</label>
+              <input asp-for="Governorate" class="dash-input" />
+            </div>
+            <div class="col-md-6">
+              <label class="dash-label" data-i18n="h_city">City</label>
+              <input asp-for="City" class="dash-input" />
+            </div>
+            <div class="col-12">
+              <label class="dash-label" data-i18n="h_address">Street Address</label>
+              <input asp-for="Address" class="dash-input" />
+            </div>
+            <div class="col-md-6">
+              <label class="dash-label" data-i18n="h_med_director">Medical Director Name</label>
+              <input asp-for="MedicalDirectorName" class="dash-input" />
+            </div>
+            <div class="col-md-6">
+              <label class="dash-label" data-i18n="h_acct_owner">Account Owner Name</label>
+              <input asp-for="AccountOwnerName" class="dash-input" />
+            </div>
+            <div class="col-md-6">
+              <label class="dash-label" data-i18n="h_new_pass">Password <span style="color:var(--mid-gray);font-weight:400;text-transform:none;" data-i18n="h_pass_leave">(leave blank to keep current)</span></label>
+              <input asp-for="Password" class="dash-input" type="password" placeholder="New password" />
+            </div>
+          </div>
+          <input type="hidden" asp-for="Id" />
+          <input type="hidden" asp-for="LicenseNumber" />
+          <input type="hidden" asp-for="IssuingAuthority" />
+          <input type="hidden" asp-for="LicenseDocument" />
+          <input type="hidden" asp-for="Role" />
+          <input type="hidden" asp-for="IsApproved" />
+          <input type="hidden" asp-for="RegistrationDate" />
+          <button type="submit" class="btn-dash mt-3"><i class="bi bi-check-lg"></i> <span data-i18n="save_btn">Save Changes</span></button>
+        </div>
+      </form>
+    </div>
+
+    <div class="dash-table-card">
+      <div style="padding:1.5rem;">
+        <h5 style="font-family:'Playfair Display',serif;font-weight:700;margin-bottom:1.5rem;color:var(--mid-gray);">
+          <i class="bi bi-lock"></i> <span data-i18n="h_info_readonly">Read-Only Information</span>
+        </h5>
+        <div class="row g-3">
+          <div class="col-md-4">
+            <label class="dash-label" data-i18n="h_license">License Number</label>
+            <div style="background:var(--warm-gray);border-radius:10px;padding:11px 16px;font-size:0.92rem;color:var(--mid-gray);">@Model.LicenseNumber</div>
+          </div>
+          <div class="col-md-4">
+            <label class="dash-label" data-i18n="h_issuer">Issuing Authority</label>
+            <div style="background:var(--warm-gray);border-radius:10px;padding:11px 16px;font-size:0.92rem;color:var(--mid-gray);">@Model.IssuingAuthority</div>
+          </div>
+          <div class="col-md-4">
+            <label class="dash-label" data-i18n="h_role">Role</label>
+            <div style="background:var(--warm-gray);border-radius:10px;padding:11px 16px;font-size:0.92rem;color:var(--mid-gray);">@Model.Role</div>
+          </div>
+          <div class="col-md-4">
+            <label class="dash-label" data-i18n="h_approved">IsApproved</label>
+            <div style="background:var(--warm-gray);border-radius:10px;padding:11px 16px;font-size:0.92rem;color:var(--mid-gray);">
+              @if (Model.IsApproved) { <span data-i18n="yes">Yes</span> } else { <span data-i18n="no">No</span> }
+            </div>
+          </div>
+          <div class="col-md-4">
+            <label class="dash-label" data-i18n="h_reg_date">Registration Date</label>
+            <div style="background:var(--warm-gray);border-radius:10px;padding:11px 16px;font-size:0.92rem;color:var(--mid-gray);">@Model.RegistrationDate.ToString("dd MMM yyyy")</div>
+          </div>
+          @if (!string.IsNullOrEmpty(Model.LicenseDocument))
+          {
+          <div class="col-md-4">
+            <label class="dash-label" data-i18n="h_lic_doc">License Document</label>
+            <div style="background:var(--warm-gray);border-radius:10px;padding:11px 16px;font-size:0.92rem;color:var(--mid-gray);">
+              <a href="@Model.LicenseDocument" target="_blank" style="color:var(--blood);"><i class="bi bi-file-earmark"></i> <span data-i18n="h_view_doc">View Document</span></a>
+            </div>
+          </div>
+          }
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

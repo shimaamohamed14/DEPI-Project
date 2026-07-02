@@ -1,0 +1,108 @@
+@{
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+    ViewData["Title"] = "User Details";
+}
+
+<div class="dashboard-layout">
+  <aside class="sidebar">
+    <div class="sidebar-brand">Admin, @User.FindFirst("EntityName")?.Value</div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-label" data-i18n="sb_overview">Overview</div>
+      <a href="/Admin/Index" class="sidebar-link"><i class="bi bi-arrow-left"></i> <span data-i18n="sb_back">Back to Dashboard</span></a>
+    </nav>
+  </aside>
+
+  <main class="dashboard-main">
+    <div class="dash-header">
+      <h1 class="dash-title">@ViewBag.FullName</h1>
+      <p class="dash-subtitle">@ViewBag.RoleLabel @(ViewBag.UserRole == "Admin" ? "Account" : "Registration Details")</p>
+    </div>
+
+    <div class="dash-table-card mb-4">
+      <div class="row g-4" style="padding:1.5rem;">
+        <div class="col-md-6">
+          <div class="feature-card" style="padding:1.5rem;">
+            <h5 style="font-family:'Playfair Display',serif;font-weight:700;margin-bottom:1rem;color:var(--blood);">
+              @if (ViewBag.UserRole == "Hospital") { <i class="bi bi-hospital"></i> }
+              else if (ViewBag.UserRole == "BloodBank") { <i class="bi bi-droplet"></i> }
+              else { <i class="bi bi-person-badge"></i> }
+              Account Information
+            </h5>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+              <div><strong>Full Name:</strong><br><span style="color:var(--mid-gray);font-size:0.9rem;">@ViewBag.FullName</span></div>
+              <div><strong>Email:</strong><br><span style="color:var(--mid-gray);font-size:0.9rem;">@ViewBag.UserEmail</span></div>
+              @if (ViewBag.Phone != null)
+              {
+                <div><strong>Phone:</strong><br><span style="color:var(--mid-gray);font-size:0.9rem;">@ViewBag.Phone</span></div>
+              }
+              <div><strong>Role:</strong><br><span style="color:var(--mid-gray);font-size:0.9rem;">@ViewBag.UserRole</span></div>
+              <div><strong>Registration Date:</strong><br><span style="color:var(--mid-gray);font-size:0.9rem;">@ViewBag.RegisteredDate.ToString("dd MMM yyyy")<br>@ViewBag.RegisteredDate.ToString("hh:mm tt")</span></div>
+              <div><strong>Status:</strong><br>
+                @if (ViewBag.IsApproved)
+                {
+                  <span class="badge bg-success">Approved ✓</span>
+                }
+                else
+                {
+                  <span class="badge bg-warning text-dark">Pending</span>
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+
+        @if (ViewBag.UserRole == "Hospital" || ViewBag.UserRole == "BloodBank")
+        {
+          <div class="col-md-6">
+            <div class="feature-card" style="padding:1.5rem;">
+              <h5 style="font-family:'Playfair Display',serif;font-weight:700;margin-bottom:1rem;color:var(--blood);">
+                @if (ViewBag.UserRole == "Hospital") { <i class="bi bi-hospital"></i> }
+                else { <i class="bi bi-droplet"></i> }
+                @ViewBag.RoleLabel Information
+              </h5>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+                <div><strong>@(ViewBag.UserRole == "Hospital" ? "Hospital Name:" : "Blood Bank Name:")</strong><br><span style="color:var(--mid-gray);font-size:0.9rem;">@ViewBag.EntityName</span></div>
+                <div><strong>License Number:</strong><br><span style="color:var(--mid-gray);font-size:0.9rem;">@ViewBag.LicenseNumber</span></div>
+                <div><strong>Issuing Authority:</strong><br><span style="color:var(--mid-gray);font-size:0.9rem;">@ViewBag.IssuingAuthority</span></div>
+                <div><strong>Governorate:</strong><br><span style="color:var(--mid-gray);font-size:0.9rem;">@ViewBag.Governorate</span></div>
+                <div><strong>City:</strong><br><span style="color:var(--mid-gray);font-size:0.9rem;">@ViewBag.City</span></div>
+                <div><strong>Address:</strong><br><span style="color:var(--mid-gray);font-size:0.9rem;">@ViewBag.Address</span></div>
+                <div><strong>Phone:</strong><br><span style="color:var(--mid-gray);font-size:0.9rem;">@ViewBag.Phone</span></div>
+                <div><strong>Email:</strong><br><span style="color:var(--mid-gray);font-size:0.9rem;">@ViewBag.Email</span></div>
+                @if (!string.IsNullOrEmpty(ViewBag.GoogleMapsLink))
+                {
+                  <div style="grid-column:span 2;"><strong>Google Maps:</strong><br><a href="@ViewBag.GoogleMapsLink" target="_blank" style="color:var(--blood);font-size:0.9rem;">@ViewBag.GoogleMapsLink</a></div>
+                }
+                <div><strong>@(ViewBag.UserRole == "Hospital" ? "Medical Director:" : "Manager:")</strong><br><span style="color:var(--mid-gray);font-size:0.9rem;">@ViewBag.DirectorName</span></div>
+                @if (!string.IsNullOrEmpty(ViewBag.LicenseDocument))
+                {
+                  <div><strong>License Document:</strong><br><a href="@ViewBag.LicenseDocument" target="_blank" style="color:var(--blood);font-size:0.9rem;"><i class="bi bi-file-earmark"></i> View License Document</a></div>
+                }
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+
+      @if (!ViewBag.IsApproved)
+      {
+        <div style="padding:1.5rem;display:flex;gap:12px;">
+          <form asp-action="Approve" asp-controller="Admin" method="post">
+            <input type="hidden" name="id" value="@ViewBag.UserId" />
+            <button type="submit" class="btn-dash" style="background:#27AE60;color:#fff;border:none;padding:10px 24px;border-radius:8px;font-weight:600;"><i class="bi bi-check-circle"></i> Approve</button>
+          </form>
+          <form asp-action="Reject" asp-controller="Admin" method="post" onsubmit="return confirm('Are you sure you want to reject this user?')">
+            <input type="hidden" name="id" value="@ViewBag.UserId" />
+            <button type="submit" class="btn-dash" style="background:#C0392B;color:#fff;border:none;padding:10px 24px;border-radius:8px;font-weight:600;"><i class="bi bi-x-circle"></i> Reject</button>
+          </form>
+        </div>
+      }
+      else
+      {
+        <div style="padding:1.5rem;">
+          <span style="font-size:1rem;color:#27AE60;font-weight:600;"><i class="bi bi-check-circle-fill"></i> Approved ✓</span>
+        </div>
+      }
+    </div>
+  </main>
+</div>

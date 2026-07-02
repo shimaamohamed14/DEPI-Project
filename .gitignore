@@ -1,0 +1,25 @@
+# Visual Studio
+.vs/
+bin/
+obj/
+
+# User-specific files
+*.user
+*.suo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# VS Code / Rider
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Uploaded files
+wwwroot/uploads/
+
+# Local settings
+Properties/launchSettings.json

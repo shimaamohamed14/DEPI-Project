@@ -1,0 +1,177 @@
+﻿@model Life_Artery1.Models.BloodBank
+@{
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+    ViewData["Title"] = "Blood Bank";
+}
+
+<div class="dashboard-layout">
+  <aside class="sidebar">
+    <div class="sidebar-brand">Blood Bank, @Model.Name</div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-label" data-i18n="sb_inventory">Inventory</div>
+      <a href="#inventory" class="sidebar-link active"><i class="bi bi-droplet-half"></i> <span data-i18n="sb_blood_units">Blood Units</span></a>
+      <a href="#alerts" class="sidebar-link"><i class="bi bi-bell"></i> <span data-i18n="sb_low_alerts">Low Stock Alerts</span></a>
+      <div class="sidebar-label" data-i18n="sb_requests">Requests</div>
+      <a href="#requests" class="sidebar-link"><i class="bi bi-inbox"></i> <span data-i18n="sb_incoming">Incoming Requests</span></a>
+      <div class="sidebar-label" data-i18n="sb_settings">Settings</div>
+      <a href="/BloodBank/BloodBankInfo" class="sidebar-link"><i class="bi bi-info-circle"></i> <span data-i18n="sb_bb_info">Blood Bank Info</span></a>
+    </nav>
+    <div style="margin-top:auto;padding-top:1rem;border-top:1px solid rgba(255,255,255,0.08);">
+      <div style="font-size:0.78rem;color:rgba(255,255,255,0.3);">@Model.Name</div>
+      <div style="font-size:0.72rem;color:rgba(255,255,255,0.2);">@Model.City - @Model.Governorate</div>
+    </div>
+  </aside>
+
+  <main class="dashboard-main">
+    <div class="dash-header">
+      <h1 class="dash-title" data-i18n="bb_dash_title">Blood Bank Dashboard</h1>
+      <p class="dash-subtitle" data-i18n="bb_dash_sub">Manage your inventory, respond to requests, and monitor stock levels.</p>
+    </div>
+
+    <div class="row g-3 mb-4">
+      <div class="col-6 col-lg-3">
+        <div class="dash-stat-card">
+          <div class="dash-stat-icon icon-red"><i class="bi bi-droplet-fill text-danger"></i></div>
+          <div class="dash-stat-value" id="bbTotalUnits">—</div>
+          <div class="dash-stat-label" data-i18n="bb_total">Total Units</div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="dash-stat-card">
+          <div class="dash-stat-icon icon-orange"><i class="bi bi-exclamation-triangle-fill" style="color:#E67E22"></i></div>
+          <div class="dash-stat-value" id="bbLowStock">—</div>
+          <div class="dash-stat-label" data-i18n="bb_low">Low Stock Types</div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="dash-stat-card">
+          <div class="dash-stat-icon icon-blue"><i class="bi bi-inbox-fill" style="color:#2980B9"></i></div>
+          <div class="dash-stat-value" id="bbPendingReqs">—</div>
+          <div class="dash-stat-label" data-i18n="bb_pending">Pending Requests</div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="dash-stat-card">
+          <div class="dash-stat-icon icon-green"><i class="bi bi-check-circle-fill" style="color:#27AE60"></i></div>
+          <div class="dash-stat-value" id="bbCompletedReqs">—</div>
+          <div class="dash-stat-label" data-i18n="bb_completed">Completed</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="alerts" class="mb-4">
+      <h4 class="dash-title" style="font-size:1.1rem;margin-bottom:1rem;" data-i18n="bb_alerts_title">⚠️ Stock Alerts</h4>
+      <div id="lowStockAlerts"></div>
+    </div>
+
+    <div id="inventory" class="dash-table-card">
+      <div class="dash-table-title">
+        <span data-i18n="bb_inv_title">Blood Inventory</span>
+        <button class="btn-dash" onclick="toggleAddUnit()"><span data-i18n="bb_add_unit">Add Unit</span></button>
+      </div>
+
+      <div class="add-form-panel" id="addUnitPanel">
+        <div class="row g-3">
+          <div class="col-md-3">
+            <label class="dash-label" data-i18n="bb_type_label">Blood Type</label>
+            <select class="dash-select" id="unitBloodType">
+              <option>Select Type</option>
+              <option value="A+">A+</option><option value="A-">A−</option>
+              <option value="B+">B+</option><option value="B-">B−</option>
+              <option value="O+">O+</option><option value="O-">O−</option>
+              <option value="AB+">AB+</option><option value="AB-">AB−</option>
+            </select>
+          </div>
+          <div class="col-md-3">
+            <label class="dash-label" data-i18n="bb_qty_label">Quantity (units)</label>
+            <input type="number" class="dash-input" id="unitQuantity" placeholder="e.g. 20" min="1">
+          </div>
+          <div class="col-md-3">
+            <label class="dash-label" data-i18n="bb_expiry_label">Expiry Date</label>
+            <input type="date" class="dash-input" id="unitExpiry">
+          </div>
+          <div class="col-md-3 d-flex align-items-end gap-2">
+            <button class="btn-dash w-100" onclick="addUnit()" data-i18n="bb_add_btn">Add Unit</button>
+            <button class="btn-dash-outline" onclick="toggleAddUnit()" data-i18n="bb_cancel">Cancel</button>
+          </div>
+        </div>
+      </div>
+
+      <table class="custom-table">
+        <thead>
+          <tr>
+            <th data-i18n="bb_col_type">Blood Type</th>
+            <th data-i18n="bb_col_qty">Quantity</th>
+            <th data-i18n="bb_col_expiry">Expiry Date</th>
+            <th data-i18n="bb_col_status">Status</th>
+            <th data-i18n="bb_col_actions">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="bloodUnitsTable">
+          <tr><td colspan="5" style="text-align:center;color:var(--mid-gray);padding:2rem;" data-i18n="loading_inv">Loading inventory...</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div id="requests" class="dash-table-card">
+      <div class="dash-table-title">
+        <span data-i18n="bb_req_title">Hospital Requests</span>
+        <span style="font-size:0.8rem;color:var(--mid-gray);font-weight:400;" data-i18n="bb_req_sub">Manage incoming blood requests from hospitals</span>
+      </div>
+      <table class="custom-table">
+        <thead>
+          <tr>
+            <th data-i18n="bb_col_hosp">Hospital</th>
+            <th data-i18n="bb_col_type">Blood Type</th>
+            <th data-i18n="bb_col_qty">Quantity</th>
+            <th data-i18n="bb_col_date">Date</th>
+            <th data-i18n="bb_col_status">Status</th>
+            <th data-i18n="bb_col_action">Action</th>
+          </tr>
+        </thead>
+        <tbody id="bankRequestsTable">
+          <tr><td colspan="6" style="text-align:center;color:var(--mid-gray);padding:2rem;" data-i18n="loading_req">Loading requests...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+</div>
+
+<div class="modal fade" id="editInventoryModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content" style="border-radius:16px;border:none;box-shadow:0 20px 60px rgba(0,0,0,0.2);">
+      <div class="modal-header" style="border:none;padding:1.5rem 1.5rem 0;">
+        <h5 class="modal-title" style="font-family:'Playfair Display',serif;font-weight:700;" id="editModalTitle" data-i18n="bb_edit_title">Edit Inventory</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body" style="padding:1.5rem;">
+        <input type="hidden" id="editInventoryId" />
+        <div class="mb-3">
+          <label class="dash-label" data-i18n="bb_col_type">Blood Type</label>
+          <select class="dash-select" id="editBloodType">
+            <option value="A+">A+</option><option value="A-">A-</option>
+            <option value="B+">B+</option><option value="B-">B-</option>
+            <option value="O+">O+</option><option value="O-">O-</option>
+            <option value="AB+">AB+</option><option value="AB-">AB-</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="dash-label" data-i18n="bb_qty_label">Quantity (units)</label>
+          <input type="number" class="dash-input" id="editQuantity" min="0" />
+        </div>
+        <div class="mb-3">
+          <label class="dash-label" data-i18n="bb_expiry_label">Expiry Date</label>
+          <input type="date" class="dash-input" id="editExpiry" />
+        </div>
+      </div>
+      <div class="modal-footer" style="border:none;padding:0 1.5rem 1.5rem;">
+        <button type="button" class="btn-dash-outline" data-bs-dismiss="modal" data-i18n="bb_cancel">Cancel</button>
+        <button type="button" class="btn-dash" onclick="saveInventoryEdit()" data-i18n="bb_save">Save Changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+fetchBloodBankData();
+</script>

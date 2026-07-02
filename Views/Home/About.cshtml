@@ -1,0 +1,156 @@
+﻿@{
+    ViewData["Title"] = "About";
+}
+
+<!-- Page Hero -->
+<section class="page-hero">
+  <div class="container page-hero-content">
+    <span class="section-tag" style="background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);" data-i18n="about_tag">Our Story</span>
+    <h1 class="page-hero-title" data-i18n="about_hero_title">About Life Artery</h1>
+    <p class="page-hero-sub mt-2" data-i18n="about_hero_sub">We strive to end blood shortages and ensure it's available safely and efficiently, giving every patient a chance to heal and a life full of hope.</p>
+  </div>
+</section>
+
+<!-- Mission -->
+<section class="py-5" style="background:var(--off-white)">
+  <div class="container py-4">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6 reveal">
+        <span class="section-tag" data-i18n="mission_tag">Our Mission</span>
+        <h2 class="section-title" data-i18n="mission_title">Why Life Artery Exists</h2>
+        <p style="color:var(--mid-gray);line-height:1.85;font-weight:300;font-size:1rem;margin-bottom:1rem;" data-i18n="mission_p1">
+          Every year, thousands of patients in Egypt lose precious time — and sometimes their lives — simply because a hospital couldn't find the right blood type quickly enough.
+        </p>
+        <p style="color:var(--mid-gray);line-height:1.85;font-weight:300;font-size:1rem;margin-bottom:1.5rem;" data-i18n="mission_p2">
+          Life Artery was created to end that. By digitizing the entire blood sourcing process, we enable instant search, digital requests, and real-time inventory management.
+        </p>
+        <div class="d-flex gap-3 flex-wrap">
+          <div style="background:rgba(192,57,43,0.08);border-radius:12px;padding:16px 20px;flex:1;min-width:140px;">
+            <div style="font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:900;color:var(--blood);">2026</div>
+            <div style="font-size:0.82rem;color:var(--mid-gray);" data-i18n="founded_label">Founded</div>
+          </div>
+          <div style="background:rgba(192,57,43,0.08);border-radius:12px;padding:16px 20px;flex:1;min-width:140px;">
+            <div style="font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:900;color:var(--blood);">@ViewBag.PartnerHospitals+</div>
+            <div style="font-size:0.82rem;color:var(--mid-gray);" data-i18n="partners_label">Partner Hospitals</div>
+          </div>
+          <div style="background:rgba(192,57,43,0.08);border-radius:12px;padding:16px 20px;flex:1;min-width:140px;">
+            <div style="font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:900;color:var(--blood);">320+</div>
+            <div style="font-size:0.82rem;color:var(--mid-gray);" data-i18n="impact_label">Lives Impacted</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 reveal">
+        <div style="background:var(--dark-brown);border-radius:24px;overflow:hidden;aspect-ratio:4/3;position:relative;">
+          <img src="~/images/Screenshot 2026-03-26 at 10.11.08 PM.png"
+               alt="Medical team" style="width:100%;height:100%;object-fit:cover;opacity:0.6;">
+          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(44,24,16,0.8),transparent)"></div>
+          <div style="position:absolute;bottom:24px;left:24px;color:#fff;">
+            <div style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;" data-i18n="mission_img_title">Every Drop Counts</div>
+            <div style="font-size:0.85rem;color:rgba(255,255,255,0.6);" data-i18n="mission_img_sub">Real-time tracking. Real impact.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Values -->
+<section class="py-5" style="background:var(--warm-gray);">
+  <div class="container py-4">
+    <div class="text-center mb-5">
+      <span class="section-tag" data-i18n="values_tag">Our Values</span>
+      <h2 class="section-title" data-i18n="values_title">What Drives Us</h2>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-4 reveal">
+        <div class="feature-card">
+          <!-- FIX: feature-icon has correct class + explicit icon render -->
+          <div class="feature-icon" >
+            <i class="bi bi-lightning-fill text-danger"></i>
+          </div>
+          <h5 data-i18n="val1_title">Speed</h5>
+          <p data-i18n="val1_desc">In emergencies, seconds matter. We've engineered every part of the system to minimize friction and maximize speed.</p>
+        </div>
+      </div>
+      <div class="col-md-4 reveal">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="bi bi-eye-fill text-danger"></i>
+          </div>
+          <h5 data-i18n="val2_title">Transparency</h5>
+          <p data-i18n="val2_desc">Real-time data. No guesswork. Every unit, every bank, every request — fully visible to the people who need to act.</p>
+        </div>
+      </div>
+      <div class="col-md-4 reveal">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="bi bi-universal-access text-danger"></i>
+          </div>
+          <h5 data-i18n="val3_title">Accessibility</h5>
+          <p data-i18n="val3_desc">Anyone in a crisis should be able to find blood without barriers. Public search requires no account, no login.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- User Roles -->
+<section class="py-5" style="background:var(--off-white);">
+  <div class="container py-4">
+    <div class="text-center mb-5">
+      <span class="section-tag" data-i18n="roles_tag">Who Uses Life Artery</span>
+      <h2 class="section-title" data-i18n="roles_title">Built for Everyone in the Chain</h2>
+    </div>
+    <div class="row g-4">
+      <div class="col-lg-3 col-md-6 reveal">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="bi bi-person-fill text-danger"></i>
+          </div>
+          <h5 data-i18n="role1_title">Public Users</h5>
+          <p data-i18n="role1_desc">Search for blood types freely. No account needed. Find the nearest available source in an emergency instantly.</p>
+          <a asp-controller="Home" asp-action="Search" class="btn-primary-custom mt-3 d-inline-flex" style="font-size:0.82rem;padding:8px 18px;" data-i18n="role1_btn">Search Now</a>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 reveal">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="bi bi-hospital-fill text-danger"></i>
+          </div>
+          <h5 data-i18n="role2_title">Hospitals</h5>
+          <p data-i18n="role2_desc">Check availability before requesting. Send digital orders. Track approval status in real-time.</p>
+          <a asp-controller="Hospital" asp-action="Index" class="btn-primary-custom mt-3 d-inline-flex" style="font-size:0.82rem;padding:8px 18px;" data-i18n="role2_btn">Hospital Portal</a>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 reveal">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="bi bi-droplet-fill text-danger"></i>
+          </div>
+          <h5 data-i18n="role3_title">Blood Banks</h5>
+          <p data-i18n="role3_desc">Manage inventory, respond to hospital requests, receive low-stock alerts, and keep data accurate.</p>
+          <a asp-controller="BloodBank" asp-action="Index" class="btn-primary-custom mt-3 d-inline-flex" style="font-size:0.82rem;padding:8px 18px;" data-i18n="role3_btn">Bank Portal</a>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 reveal">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="bi bi-gear-fill text-danger"></i>
+          </div>
+          <h5 data-i18n="role4_title">Administrators</h5>
+          <p data-i18n="role4_desc">Manage users, monitor all inventory and requests system-wide, view statistics and ensure quality.</p>
+          <a asp-controller="Admin" asp-action="Index" class="btn-primary-custom mt-3 d-inline-flex" style="font-size:0.82rem;padding:8px 18px;" data-i18n="role4_btn">Admin Panel</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container" style="position:relative;z-index:2;">
+    <h2 class="cta-title" data-i18n="about_cta_title">Ready to make a difference?</h2>
+    <p class="cta-sub" data-i18n="about_cta_sub">Join Life Artery and become part of the network saving lives across Egypt.</p>
+            <a asp-controller="Home" asp-action="Search" class="btn-primary-custom" data-i18n="about_cta_btn">Search Blood Now →</a>
+  </div>
+</section>

@@ -1,0 +1,224 @@
+﻿@model List<Life_Artery1.Models.Users>
+@{
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+    ViewData["Title"] = "Admin";
+}
+
+<div class="dashboard-layout">
+  <aside class="sidebar">
+    <div class="sidebar-brand">Admin, @User.FindFirst("EntityName")?.Value</div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-label" data-i18n="sb_overview">Overview</div>
+      <a href="#stats" class="sidebar-link active"><i class="bi bi-graph-up-arrow"></i> <span data-i18n="sb_stats">Statistics</span></a>
+      <div class="sidebar-label" data-i18n="sb_management">Management</div>
+      <a href="#users" class="sidebar-link" data-filter="All"><i class="bi bi-people-fill"></i> <span data-i18n="sb_users">User Management</span></a>
+      <a href="#users" class="sidebar-link" data-filter="Hospital"><i class="bi bi-hospital"></i> <span data-i18n="sb_hospitals">Hospitals</span></a>
+      <a href="#users" class="sidebar-link" data-filter="BloodBank"><i class="bi bi-droplet"></i> <span data-i18n="sb_blood_banks">Blood Banks</span></a>
+      <a href="#all-requests" class="sidebar-link"><i class="bi bi-list-check"></i> <span data-i18n="sb_all_req">All Requests</span></a>
+      <a href="#contact-messages" class="sidebar-link"><i class="bi bi-envelope"></i> <span data-i18n="sb_contact_msgs">Contact Messages</span></a>
+    </nav>
+    <div style="margin-top:auto;padding-top:1rem;border-top:1px solid rgba(255,255,255,0.08);">
+      <div style="font-size:0.78rem;color:rgba(255,255,255,0.3);">System Administrator</div>
+      <div style="font-size:0.72rem;color:rgba(255,255,255,0.2);">admin@lifeartery.eg</div>
+    </div>
+  </aside>
+
+  <main class="dashboard-main">
+    <div class="dash-header">
+      <h1 class="dash-title" data-i18n="adm_title">Admin Control Panel</h1>
+      <p class="dash-subtitle" data-i18n="adm_sub">System-wide overview — manage users, monitor requests, and track inventory.</p>
+    </div>
+
+    <div id="stats" class="row g-3 mb-4">
+      <div class="col-6 col-lg-3">
+        <div class="dash-stat-card">
+          <div class="dash-stat-icon icon-red"><i class="bi bi-droplet-fill text-danger"></i></div>
+          <div class="dash-stat-value" id="statTotalUnits">—</div>
+          <div class="dash-stat-label" data-i18n="adm_total_units">Total Blood Units</div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="dash-stat-card">
+          <div class="dash-stat-icon icon-blue"><i class="bi bi-send-fill" style="color:#2980B9"></i></div>
+          <div class="dash-stat-value" id="statTotalReqs">—</div>
+          <div class="dash-stat-label" data-i18n="adm_total_reqs">Total Requests</div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="dash-stat-card">
+          <div class="dash-stat-icon icon-green"><i class="bi bi-people-fill" style="color:#27AE60"></i></div>
+          <div class="dash-stat-value" id="statTotalUsers">—</div>
+          <div class="dash-stat-label" data-i18n="adm_users">Registered Users</div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="dash-stat-card">
+          <div class="dash-stat-icon icon-orange"><i class="bi bi-hourglass-split" style="color:#E67E22"></i></div>
+          <div class="dash-stat-value" id="statPending">—</div>
+          <div class="dash-stat-label" data-i18n="adm_pending">Pending Requests</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-3 mb-4">
+      <div class="col-md-6">
+        <div class="dash-stat-card" style="background:linear-gradient(135deg,var(--blood),var(--crimson));border:none;color:#fff;">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <div>
+              <div style="font-size:0.78rem;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,0.6);margin-bottom:4px;" data-i18n="adm_status_title">System Status</div>
+              <div style="font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:900;" data-i18n="adm_status_val">🟢 Operational</div>
+              <div style="font-size:0.82rem;color:rgba(255,255,255,0.65);margin-top:4px;" data-i18n="adm_status_sub">All systems normal</div>
+            </div>
+            <i class="bi bi-shield-check" style="font-size:3rem;opacity:0.3;"></i>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="dash-stat-card" style="background:linear-gradient(135deg,#1A3A4A,#0D2535);border:none;color:#fff;">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <div>
+              <div style="font-size:0.78rem;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,0.5);margin-bottom:4px;" data-i18n="adm_updated">Last Updated</div>
+              <div style="font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:900;" id="lastUpdated">
+                @if (ViewBag.LastUpdated != null)
+                {
+                  var d = (DateTime)ViewBag.LastUpdated;
+                  @d.ToString("dd MMM yyyy")<br style="display:none;" />@d.ToString("hh:mm tt")
+                }
+                else
+                {
+                  <span data-i18n="last_updated_none">No recent activity</span>
+                }
+              </div>
+              <div style="font-size:0.82rem;color:rgba(255,255,255,0.5);margin-top:4px;" data-i18n="adm_sync">Real-time sync</div>
+            </div>
+            <i class="bi bi-clock-fill" style="font-size:3rem;opacity:0.2;"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="users" class="dash-table-card mb-4">
+      <div class="dash-table-title">
+        <span data-i18n="adm_users_title">User Management</span>
+      </div>
+
+     
+
+      @if (TempData["Success"] != null)
+      {
+          <div class="alert alert-success">@TempData["Success"]</div>
+      }
+      @if (TempData["Error"] != null)
+      {
+          <div class="alert alert-danger">@TempData["Error"]</div>
+      }
+
+      <div class="table-responsive">
+        <table class="custom-table" id="adminUsersTable">  
+          <thead>
+            <tr>
+              <th data-i18n="adm_col_name">Name</th>
+              <th data-i18n="adm_col_email">Email</th>
+              <th data-i18n="adm_col_role">Role</th>
+              <th data-i18n="adm_col_details">Details</th>
+              <th data-i18n="adm_col_actions">Status</th>
+              <th data-i18n="bb_col_action">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+              @foreach (var user in Model)
+              {
+                  <tr data-role="@user.Role">
+                      <td>@user.FullName</td>
+                      <td>@user.Email</td>
+                      <td>@user.Role</td>
+                      <td>
+                            <a href="/Admin/Details/@user.Id" class="btn-dash-sm" style="background:rgba(192,57,43,0.1);color:var(--blood);border:1px solid rgba(192,57,43,0.2);border-radius:6px;padding:4px 12px;text-decoration:none;font-size:0.82rem;">
+                            <i class="bi bi-eye-fill"></i> <span data-i18n="adm_view_details">View Details</span>
+                          </a>
+                      </td>
+                      <td>
+                          @if (user.IsApproved)
+                          {
+                              <span class="badge bg-success" data-i18n="status_approved">Approved</span>
+                          }
+                          else
+                          {
+                              <span class="badge bg-warning text-dark" data-i18n="status_pending">Pending</span>
+                          }
+                      </td>
+                      <td>
+                          @if (!user.IsApproved)
+                          {
+                              <form asp-action="Approve" asp-controller="Admin" method="post" style="display:inline">
+                                  <input type="hidden" name="id" value="@user.Id" />
+                                  <button type="submit" class="btn-dash-sm" style="background:#27AE60;color:#fff;border:none;padding:4px 12px;border-radius:6px;" data-i18n="approve_btn">Approve</button>
+                              </form>
+                              <form asp-action="Reject" asp-controller="Admin" method="post" style="display:inline" onsubmit="return confirm('Are you sure you want to reject this user?')">
+                                  <input type="hidden" name="id" value="@user.Id" />
+                                  <button type="submit" class="btn-dash-sm" style="background:#C0392B;color:#fff;border:none;padding:4px 12px;border-radius:6px;" data-i18n="reject_btn">Reject</button>
+                              </form>
+                          }
+                          else
+                          {
+                              <span class="text-success" style="font-size:0.85rem;" data-i18n="status_approved">Approved ✓</span>
+                          }
+                          <form asp-action="DeleteUser" asp-controller="Admin" method="post" style="display:inline" onsubmit="return confirm('Are you sure you want to delete this user?')">
+                              <input type="hidden" name="id" value="@user.Id" />
+                              <button type="submit" class="btn-dash-sm" style="background:transparent;border:1px solid rgba(192,57,43,0.3);color:var(--blood);padding:4px 12px;border-radius:6px;margin-left:4px;" data-i18n="delete_btn">Delete</button>
+                          </form>
+                      </td>
+                  </tr>
+              }
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="all-requests" class="dash-table-card mb-4">
+      <div class="dash-table-title" data-i18n="adm_all_req_title">All System Requests</div>
+      <div class="table-responsive">
+        <table class="custom-table">
+          <thead>
+            <tr>
+              <th data-i18n="bb_col_hosp">Hospital</th>
+              <th data-i18n="bb_col_type">Blood Type</th>
+              <th data-i18n="bb_col_qty">Quantity</th>
+              <th data-i18n="h_col_bank">Blood Bank Name</th>
+              <th data-i18n="bb_col_date">Date</th>
+              <th data-i18n="bb_col_status">Status</th>
+            </tr>
+          </thead>
+          <tbody id="allRequestsTable">
+            <tr><td colspan="6" style="text-align:center;color:var(--mid-gray);padding:2rem;" data-i18n="loading_req">Loading requests...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="contact-messages" class="dash-table-card mb-4">
+      <div class="dash-table-title" data-i18n="sb_contact_msgs">Contact Messages</div>
+      <div class="table-responsive">
+        <table class="custom-table">
+          <thead>
+            <tr>
+              <th data-i18n="adm_col_name">Name</th>
+              <th data-i18n="adm_col_email">Email</th>
+              <th data-i18n="contact_subject_label">Subject</th>
+              <th data-i18n="contact_message_label">Message</th>
+              <th data-i18n="h_col_date">Date</th>
+            </tr>
+          </thead>
+          <tbody id="contactMessagesTable">
+            <tr><td colspan="5" style="text-align:center;color:var(--mid-gray);padding:2rem;" data-i18n="loading_req">Loading messages...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+fetchAdminData();
+</script>

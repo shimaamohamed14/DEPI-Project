@@ -1,0 +1,86 @@
+﻿@model Life_Artery1.ViewModels.LoginViewModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign In – Life Artery</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/style.css">
+</head>
+<body>
+    <div class="auth-bg"></div>
+    <div class="auth-gradient"></div>
+    <div class="decor-drop" style="width:180px;height:180px;top:8%;left:4%;transform:rotate(-45deg);"></div>
+    <div class="decor-drop" style="width:110px;height:110px;bottom:12%;right:6%;transform:rotate(135deg);"></div>
+    <div class="decor-drop" style="width:70px;height:70px;top:42%;right:18%;transform:rotate(-20deg);"></div>
+
+    <!-- NAV -->
+    <nav class="auth-nav">
+        <a asp-controller="Home" asp-action="Index" class="auth-nav-brand">🩸 Life Artery</a>
+        <div class="nav-actions">
+            <a asp-controller="Home" asp-action="Index" class="nav-back"><i class="bi bi-arrow-left"></i> <span id="txt-back">Back to Home</span></a>
+            <button class="lang-toggle" onclick="toggleLang()"><i class="bi bi-translate"></i><span id="langLabel">العربية</span></button>
+        </div>
+    </nav>
+
+    <div class="auth-wrapper">
+        <div class="auth-card" id="authCard">
+
+            <!-- TABS -->
+            <div class="auth-tabs">
+                <button class="auth-tab active" id="tabSignIn" onclick="switchTab('signin')"><span id="txt-tab-signin">Sign In</span></button>
+            </div>
+
+            @if (TempData["Success"] != null)
+            {
+                <div class="auth-alert success show" style="display:flex;margin:0 24px 12px;">
+                    <i class="bi bi-check-circle-fill"></i><span>@TempData["Success"]</span>
+                </div>
+            }
+
+            <div class="auth-panel active" id="panelSignin">
+                <div class="card-brand">
+                    <div class="card-brand-icon"></div>
+                    <div class="card-brand-title" id="txt-welcome">Welcome Back</div>
+                    <div class="card-brand-sub" id="txt-welcome-sub">Sign in to access your dashboard</div>
+                </div>
+                <form asp-action="Login" asp-controller="Account" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger" style="margin-bottom:12px;"></div>
+                    <div class="auth-field">
+                        <label class="auth-label" data-i18n="contact_email_label">Email Address</label>
+                        <input asp-for="Email"
+                            class="auth-input"
+                            placeholder="your@email.com" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="auth-field">
+                        <label class="auth-label" data-i18n="login_password_label">Password</label>
+                        <div class="input-group-auth">
+                            <input asp-for="Password"
+                                class="auth-input"
+                                id="loginPassword" />
+                            <button type="button"
+                                    class="toggle-pass"
+                                    onclick="togglePass('loginPassword',this)">
+                                <i class="bi bi-eye-slash"></i>
+                            </button>
+                        </div>
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <button type="submit" class="auth-btn" id="txt-signin-btn">Sign In →</button>
+                </form>
+                <div class="auth-switch"><span id="txt-no-acc">Don't have an account?</span> <a asp-controller="Account" asp-action="Register" id="txt-go-signup">Sign Up</a></div>
+            </div>
+
+        </div>
+    </div>
+    <script src="~/js/main.js"></script>
+    <partial name="_ValidationScriptsPartial" />
+</body>
+</html>
